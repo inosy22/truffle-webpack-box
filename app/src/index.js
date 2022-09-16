@@ -1,10 +1,12 @@
 import Web3 from "web3";
 import metaCoinArtifact from "../../build/contracts/MetaCoin.json";
+import myNFTArtifact from "../../build/contracts/MyNFT.json";
 
 const App = {
   web3: null,
   account: null,
   meta: null,
+  nft: null,
 
   start: async function() {
     const { web3 } = this;
@@ -12,10 +14,15 @@ const App = {
     try {
       // get contract instance
       const networkId = await web3.eth.net.getId();
-      const deployedNetwork = metaCoinArtifact.networks[networkId];
+      const metaCoinDeployedNetwork = metaCoinArtifact.networks[networkId];
+      const myNFTDeployNetwork = myNFTArtifact.networks[networkId];
       this.meta = new web3.eth.Contract(
         metaCoinArtifact.abi,
-        deployedNetwork.address,
+        metaCoinDeployedNetwork.address,
+      );
+      this.nft = new web3.eth.Contract(
+        myNFTArtifact.abi,
+        myNFTDeployNetwork.address,
       );
 
       // get accounts
@@ -40,13 +47,26 @@ const App = {
     const amount = parseInt(document.getElementById("amount").value);
     const receiver = document.getElementById("receiver").value;
 
-    this.setStatus("Initiating transaction... (please wait)");
+    this.setStatus("Initiating sendCoin transaction... (please wait)");
 
     const { sendCoin } = this.meta.methods;
     await sendCoin(receiver, amount).send({ from: this.account });
 
     this.setStatus("Transaction complete!");
     this.refreshBalance();
+  },
+
+  createNFT: async function() {
+    const id = parseInt(document.getElementById("id").value);
+    const name = document.getElementById("name").value;
+    
+    this.setStatus("Initiating createNFT transaction... (please wait)");
+
+    const { createToken } = this.nft.methods;
+    await createToken(id, name).send({ from: this.account });
+    
+    this.setStatus("Transaction complete!");
+
   },
 
   setStatus: function(message) {
