@@ -49,7 +49,13 @@ module.exports = {
     // },
     
     develop: {
-      port: 8545
+      port: 8545,
+      network_id: "5777",
+    },
+    ganache: {
+      host: "localhost",
+      port: 7545,
+      network_id: "5777",
     },
 
     // Another network with more advanced options...
