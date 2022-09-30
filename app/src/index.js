@@ -58,15 +58,27 @@ const App = {
 
   createNFT: async function() {
     const id = parseInt(document.getElementById("id").value);
-    const name = document.getElementById("name").value;
     
     this.setStatus("Initiating createNFT transaction... (please wait)");
 
     const { createToken } = this.nft.methods;
-    await createToken(id, name).send({ from: this.account });
+    await createToken(id).send({ from: this.account, gasPrice: 0 });
     
     this.setStatus("Transaction complete!");
 
+  },
+
+  transferNFT: async function() {
+    const tokenId = parseInt(document.getElementById("tokenId").value);
+    const nftReceiver = document.getElementById("nftReceiver").value;
+
+    this.setStatus("Initiating transferNFT transaction... (please wait)");
+
+    console.log({tokenId: tokenId, nftReceiver: nftReceiver, thisAccout: this.account});
+    const { transferFrom } = this.nft.methods;
+    await transferFrom(this.account, nftReceiver, tokenId).send({ from: this.account });
+
+    this.setStatus("Transaction complete!");
   },
 
   setStatus: function(message) {

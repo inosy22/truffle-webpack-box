@@ -32,10 +32,17 @@
     <label for="id">ID:</label>
     <input type="number" id="id" placeholder="123" />
 
-    <label for="name">Name:</label>
-    <input type="text" id="name" placeholder="nft name" />
-
     <button onclick="App.createNFT()">Create NFT</button>
+
+    <h2>Transfer NFT</h2>
+
+    <label for="tokenId">TokenID:</label>
+    <input type="number" id="tokenId" placeholder="123" />
+
+    <label for="nftReceiver">NFTReceiver:</label>
+    <input type="text" id="nftReceiver" placeholder="receiver address" />
+
+    <button onclick="App.transferNFT()">Transfer NFT</button>
 
     <p id="status"></p>
     <p>
