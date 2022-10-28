@@ -1,0 +1,25 @@
+{
+    "attributes" : [
+       {
+          "trait_type" : "HP",
+          "value" : 234
+       },
+       {
+          "trait_type" : "Attack",
+          "value" : 100
+       },
+       {
+          "trait_type" : "Defence",
+          "value" : 50
+       },
+       {
+          "trait_type" : "Speciality",
+          "value" : "sleepy"
+       }
+    ],
+    "description" : "This is my ",
+    "external_url" : "https://example.com/?token_id=2",
+    "image" : "https://bafybeibl6ef3mwzen3rug7hdfh2cl3mu35bfrxgbhjumowbo37lcirgicy.ipfs.nftstorage.link/images/nft-test-inosy22.png",
+    "name" : "nft-test-inosy22"
+ }
+ 
