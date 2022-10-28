@@ -24,6 +24,10 @@
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
+require('dotenv').config();
+const { ALCHEMY_KEY, ACCOUNT_PRIVATE_KEY } = process.env;
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+
 module.exports = {
   /**
    * Networks define how you connect to your ethereum client and let you set the
@@ -56,6 +60,10 @@ module.exports = {
       host: "localhost",
       port: 7545,
       network_id: "5777",
+    },
+    goerli: {
+      provider: () => new HDWalletProvider(ACCOUNT_PRIVATE_KEY, `https://eth-goerli.g.alchemy.com/v2/${ALCHEMY_KEY}`),
+      network_id: 5, // Goerli's id
     },
 
     // Another network with more advanced options...
